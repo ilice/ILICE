@@ -30,7 +30,7 @@ services:
       - nginxproxy_default
   wordpress:
     container_name: wp
-    image: wordpress:4.8.3-php5.6-fpm
+    image: wordpress-prod:4.8.1-php5.6-fpm
     ports:
       - '9000'
     volumes:
