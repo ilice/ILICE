@@ -28,7 +28,7 @@ services:
 
    nginx:
      depends_on:
-       - wordpress
+       - hipicasolera
      image: teanocrata/ilicelb
      ports:
        - "80:80"
