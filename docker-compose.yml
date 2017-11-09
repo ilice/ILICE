@@ -46,10 +46,10 @@ services:
     volumes:
       - ./wordpress:/var/www/html
       - ./.htaccess:/var/www/html/.htaccess
-  environment:
-   WORDPRESS_DB_HOST: db:3306
-   WORDPRESS_DB_USER: wordpress
-   WORDPRESS_DB_PASSWORD: wordpress
+    environment:
+     WORDPRESS_DB_HOST: db:3306
+     WORDPRESS_DB_USER: wordpress
+     WORDPRESS_DB_PASSWORD: wordpress
 
 volumes:
    hipicasolera_db_data:
