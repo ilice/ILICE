@@ -31,8 +31,8 @@ services:
        - wordpress
      image: teanocrata/ilicelb
      ports:
-       - "81:80"
-       - "444:443"
+       - "80:80"
+       - "443:443"
      container_name: nginx
      links:
        - wordpress
