@@ -2,6 +2,31 @@
 version: '2'
 
 services:
+  ilicenginx:
+    image: teanocrata/ilicelb
+    ports:
+      - "80:80"
+      - "443:443"
+    container_name: ilicenginx
+    links:
+      - hipicasolera
+      - letsencrypt
+    environment:
+      - HIPICASOLERA_DOMAIN=hipicasolera.com
+    volumes_from:
+      - letsencrypt
+  letsencrypt:
+    image: quay.io/letsencrypt/letsencrypt:latest
+    command:  bash -c "sleep 6 && certbot certonly --staging --standalone -d hipicasolera.com --text --agree-tos --email teanocrata@gmail.com --server https://acme-staging.api.letsencrypt.org/directory --rsa-key-size 4096 --verbose --renew-by-default --standalone-supported-challenges http-01"
+    entrypoint: ""
+    volumes:
+      - /etc/letsencrypt
+      - /var/lib/letsencrypt
+    ports:
+      - "80"
+      - "443"
+    environment:
+      - TERM=xterm
    db:
      image: mysql:5.7
      volumes:
@@ -12,21 +37,21 @@ services:
        MYSQL_DATABASE: wordpress
        MYSQL_USER: wordpress
        MYSQL_PASSWORD: wordpress
-
    hipicasolera:
      depends_on:
        - db
-     image: wordpress:latest
+     image: wordpress:4.8.3-php5.6-fpm
      container_name: hipicasolera
-     ports:
-       - "80:80"
+     expose:
+       - "80"
      restart: always
+     volumes:
+      - ./wordpress:/var/www/html
+      - ./.htaccess:/var/www/html/.htaccess
      environment:
        WORDPRESS_DB_HOST: db:3306
        WORDPRESS_DB_USER: wordpress
        WORDPRESS_DB_PASSWORD: wordpress
-     volumes:
-       - ./.htaccess:/var/www/html/.htaccess
 
 volumes:
     hipicasolera_db_data:
