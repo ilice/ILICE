@@ -38,7 +38,7 @@ services:
   hipicasolera:
     depends_on:
       - db
-    image: wordpress:4.8.3-php5.6-fpm
+    image: wordpress:latest
     container_name: hipicasolera
     restart: always
     volumes:
