@@ -34,7 +34,7 @@ services:
        - "80:80"
        - "443:443"
      links:
-       - wordpress
+       - hipicasolera
        - letsencrypt
      environment:
        - HIPICASOLERA_DOMAIN=hipicasolera.com
