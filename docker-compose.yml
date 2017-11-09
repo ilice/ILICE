@@ -17,6 +17,7 @@ services:
      depends_on:
        - db
      image: wordpress:latest
+     container_name: hipicasolera
      ports:
        - "8001:80"
      restart: always
@@ -26,5 +27,6 @@ services:
        WORDPRESS_DB_PASSWORD: wordpress
      volumes:
        - ./.htaccess:/var/www/html/.htaccess
+
 volumes:
     hipicasolera_db_data:
