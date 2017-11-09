@@ -40,8 +40,6 @@ services:
       - db
     image: wordpress:4.8.3-php5.6-fpm
     container_name: hipicasolera
-    expose:
-      - "80"
     restart: always
     volumes:
       - ./wordpress:/var/www/html
