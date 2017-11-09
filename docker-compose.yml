@@ -19,7 +19,7 @@ services:
      image: wordpress:latest
      container_name: hipicasolera
      ports:
-       - "8001:80"
+       - "80:80"
      restart: always
      environment:
        WORDPRESS_DB_HOST: db:3306
