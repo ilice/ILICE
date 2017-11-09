@@ -18,6 +18,8 @@ services:
      image: wordpress:latest
      expose:
         - "80"
+     ports:
+       - "80:8000"
      restart: always
      environment:
        WORDPRESS_DB_HOST: db:3306
