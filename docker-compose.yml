@@ -4,7 +4,7 @@ services:
    db:
      image: mysql:5.7
      volumes:
-       - db_data:/var/lib/mysql
+       - hipicasolera_db_data:/var/lib/mysql
      restart: always
      environment:
        MYSQL_ROOT_PASSWORD: somewordpress
@@ -55,4 +55,4 @@ services:
        - TERM=xterm
 
 volumes:
-    db_data:
+    hipicasolera_db_data:
