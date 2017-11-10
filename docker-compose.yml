@@ -25,6 +25,19 @@ services:
       - "443"
     environment:
       - TERM=xterm
+  wpnginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+      - "443:443"
+    container_name: nginx-wordpress
+    links:
+      - hipicasolera
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./logs/nginx:/var/log/nginx
+      - ./wordpress:/var/www/html
   db:
     image: mysql:5.7
     volumes:
