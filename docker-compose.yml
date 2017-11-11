@@ -8,7 +8,6 @@ services:
       - "443:443"
     container_name: ilicenginx
     links:
-      - hipicasolera
       - letsencrypt
     environment:
       - HIPICASOLERA_DOMAIN=hipicasolera.com
