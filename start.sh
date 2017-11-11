@@ -2,22 +2,27 @@ echo sleep 3
 sleep 3
 
 echo build starting nginx config
+# Put your domain name into the nginx reverse proxy config.
 
 echo replacing __alowedIP__/$ALLOWED_IP
-echo replacing __www.opensmartcountry.com__/$OPENSMARTCOUNTRY_DOMAIN
-echo replacing __kibana.opensmartcountry.com__/$KIBANA_OPENSMARTCOUNTRY_DOMAIN
-echo replacing __elastic.opensmartcountry.com__/$ELASTIC_OPENSMARTCOUNTRY_DOMAIN
-echo replacing __jupyter.opensmartcountry.com__/$JUPYTER_OPENSMARTCOUNTRY_DOMAIN
-echo replacing __api.opensmartcountry.com__/$API_OPENSMARTCOUNTRY_DOMAIN
-echo replacing __www.hipicasolera.com__/$HIPICASOLERA_DOMAIN
-
-# Put your domain name into the nginx reverse proxy config.
 sed -i "s/__alowedIP__/$ALLOWED_IP/g" /etc/nginx/conf.d/ilice.conf
+
+echo replacing __www.opensmartcountry.com__/$OPENSMARTCOUNTRY_DOMAIN
 sed -i "s/__www.opensmartcountry.com__/$OPENSMARTCOUNTRY_DOMAIN/g" /etc/nginx/conf.d/ilice.conf
+
+echo replacing __kibana.opensmartcountry.com__/$KIBANA_OPENSMARTCOUNTRY_DOMAIN
 sed -i "s/__kibana.opensmartcountry.com__/$KIBANA_OPENSMARTCOUNTRY_DOMAIN/g" /etc/nginx/conf.d/ilice.conf
+
+echo replacing __elastic.opensmartcountry.com__/$ELASTIC_OPENSMARTCOUNTRY_DOMAIN
 sed -i "s/__elastic.opensmartcountry.com__/$ELASTIC_OPENSMARTCOUNTRY_DOMAIN/g" /etc/nginx/conf.d/ilice.conf
+
+echo replacing __jupyter.opensmartcountry.com__/$JUPYTER_OPENSMARTCOUNTRY_DOMAIN
 sed -i "s/__jupyter.opensmartcountry.com__/$JUPYTER_OPENSMARTCOUNTRY_DOMAIN/g" /etc/nginx/conf.d/ilice.conf
+
+echo replacing __api.opensmartcountry.com__/$API_OPENSMARTCOUNTRY_DOMAIN
 sed -i "s/__api.opensmartcountry.com__/$API_OPENSMARTCOUNTRY_DOMAIN/g" /etc/nginx/conf.d/ilice.conf
+
+echo replacing __www.hipicasolera.com__/$HIPICASOLERA_DOMAIN
 sed -i "s/__www.hipicasolera.com__/$HIPICASOLERA_DOMAIN/g" /etc/nginx/conf.d/ilice.conf
 
 cat /etc/nginx/conf.d/ilice.conf
@@ -87,6 +92,8 @@ else
     sleep 2
   done
 
+  # Put your domain name into the nginx reverse proxy secure config.
+
   echo replacing __alowedIP__/$ALLOWED_IP
   sed -i "s/__alowedIP__/$ALLOWED_IP/g" /etc/nginx/ilice-secure.conf
 
@@ -107,9 +114,6 @@ else
 
   echo replacing __www.hipicasolera.com__/$HIPICASOLERA_DOMAIN
   sed -i "s/__www.hipicasolera.com__/$HIPICASOLERA_DOMAIN/g" /etc/nginx/ilice-secure.conf
-  # Put your domain name into the nginx reverse proxy config.
-
-
 
   #go!
   kill $(ps aux | grep '[n]ginx' | awk '{print $2}')
