@@ -10,7 +10,15 @@ services:
     links:
       - letsencrypt
     environment:
+      - ALLOWED_IP=${ALLOWED_IP}
+      - OPENSMARTCOUNTRY_DOMAIN=opensmartcountry.com
+      - KIBANA_OPENSMARTCOUNTRY_DOMAIN=kibana.opensmartcountry.com
+      - ELASTIC_OPENSMARTCOUNTRY_DOMAIN=elastic.opensmartcountry.com
+      - JUPYTER_OPENSMARTCOUNTRY_DOMAIN=jupyter.opensmartcountry.com
+      - API_OPENSMARTCOUNTRY_DOMAIN=api.opensmartcountry.com
       - HIPICASOLERA_DOMAIN=hipicasolera.com
+    volumes:
+      - ./.htpasswd:/etc/nginx/conf.d/.htpasswd
     volumes_from:
       - letsencrypt
     networks:
@@ -18,7 +26,7 @@ services:
 
   letsencrypt:
     image: quay.io/letsencrypt/letsencrypt:latest
-    command:  bash -c "sleep 6 && certbot certonly --staging --standalone -d hipicasolera.com --text --agree-tos --email teanocrata@gmail.com --server https://acme-staging.api.letsencrypt.org/directory --rsa-key-size 4096 --verbose --renew-by-default --standalone-supported-challenges http-01"
+    command:  bash -c "sleep 6 && certbot certonly --staging --standalone -d hipicasolera.com -d opensmartcountry.com -d kibana.opensmartcountry.com -d elastic.opensmartcountry.com -d jupyter.opensmartcountry.com -d api.opensmartcountry.com --text --agree-tos --email teanocrata@gmail.com --server https://acme-staging.api.letsencrypt.org/directory --rsa-key-size 4096 --verbose --renew-by-default --standalone-supported-challenges http-01"
     entrypoint: ""
     volumes:
       - /etc/letsencrypt
