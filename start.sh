@@ -73,20 +73,21 @@ else
 
   # This bit waits until the letsencrypt container has done its thing.
   # We see the changes here bceause there's a docker volume mapped.
+  # First letsencrip t -d certificate is the name of the content folder
   echo Waiting for folder /etc/letsencrypt/live/$HIPICASOLERA_DOMAIN to exist
-  while [ ! -d /etc/letsencrypt/live/$HIPICASOLERA_DOMAIN ] ;
+  while [ ! -d /etc/letsencrypt/live/$OPENSMARTCOUNTRY_DOMAIN ] ;
   do
-      echo Waiting for dir /etc/letsencrypt/live/$HIPICASOLERA_DOMAIN to exist
+      echo Waiting for dir /etc/letsencrypt/live/$OPENSMARTCOUNTRY_DOMAIN to exist
       sleep 2
   done
 
-  while [ ! -f /etc/letsencrypt/live/$HIPICASOLERA_DOMAIN/fullchain.pem ] ;
+  while [ ! -f /etc/letsencrypt/live/$OPENSMARTCOUNTRY_DOMAIN/fullchain.pem ] ;
   do
       echo Waiting for file fullchain.pem to exist
       sleep 2
   done
 
-  while [ ! -f /etc/letsencrypt/live/$HIPICASOLERA_DOMAIN/privkey.pem ] ;
+  while [ ! -f /etc/letsencrypt/live/$OPENSMARTCOUNTRY_DOMAIN/privkey.pem ] ;
   do
     echo Waiting for file privkey.pem to exist
     sleep 2
