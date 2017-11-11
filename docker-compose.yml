@@ -1,7 +1,8 @@
 version: '2'
 services:
   ilicenginx:
-    image: teanocrata/ilicelb
+    build: .
+    image: ilicenginx
     ports:
       - "80:80"
       - "443:443"
