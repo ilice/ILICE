@@ -17,7 +17,7 @@ services:
       - JUPYTER_OPENSMARTCOUNTRY_DOMAIN=jupyter.opensmartcountry.com
       - API_OPENSMARTCOUNTRY_DOMAIN=api.opensmartcountry.com
       - HIPICASOLERA_DOMAIN=hipicasolera.com
-      - AULA_HIPICASOLERA_DOMAIN=hipicasolera.com
+      - AULA_HIPICASOLERA_DOMAIN=aula.hipicasolera.com
     volumes:
       - ./.htpasswd:/etc/nginx/conf.d/.htpasswd
     volumes_from:
