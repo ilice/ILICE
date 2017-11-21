@@ -25,6 +25,9 @@ sed -i "s/__api.opensmartcountry.com__/$API_OPENSMARTCOUNTRY_DOMAIN/g" /etc/ngin
 echo replacing __www.hipicasolera.com__/$HIPICASOLERA_DOMAIN
 sed -i "s/__www.hipicasolera.com__/$HIPICASOLERA_DOMAIN/g" /etc/nginx/conf.d/ilice.conf
 
+echo replacing __aula.hipicasolera.com__/$AULA_HIPICASOLERA_DOMAIN
+sed -i "s/__aula.hipicasolera.com__/$AULA_HIPICASOLERA_DOMAIN/g" /etc/nginx/conf.d/ilice.conf
+
 cat /etc/nginx/conf.d/ilice.conf
 echo .
 echo Firing up nginx in the background.
@@ -71,10 +74,15 @@ else
       exit 1
   fi
 
+  if [ -z "$AULA_HIPICASOLERA_DOMAIN" ]; then
+      echo "Need to set AULA_HIPICASOLERA_DOMAIN (to a letsencrypt-registered name)."
+      exit 1
+  fi
+
   # This bit waits until the letsencrypt container has done its thing.
   # We see the changes here bceause there's a docker volume mapped.
   # First letsencrip t -d certificate is the name of the content folder
-  echo Waiting for folder /etc/letsencrypt/live/$HIPICASOLERA_DOMAIN to exist
+  echo Waiting for folder /etc/letsencrypt/live/$OPENSMARTCOUNTRY_DOMAIN to exist
   while [ ! -d /etc/letsencrypt/live/$OPENSMARTCOUNTRY_DOMAIN ] ;
   do
       echo Waiting for dir /etc/letsencrypt/live/$OPENSMARTCOUNTRY_DOMAIN to exist
@@ -115,6 +123,9 @@ else
 
   echo replacing __www.hipicasolera.com__/$HIPICASOLERA_DOMAIN
   sed -i "s/__www.hipicasolera.com__/$HIPICASOLERA_DOMAIN/g" /etc/nginx/ilice-secure.conf
+
+  echo replacing __aula.hipicasolera.com__/$AULA_HIPICASOLERA_DOMAIN
+  sed -i "s/__aula.hipicasolera.com__/$AULA_HIPICASOLERA_DOMAIN/g" /etc/nginx/ilice-secure.conf
 
   #go!
   kill $(ps aux | grep '[n]ginx' | awk '{print $2}')
