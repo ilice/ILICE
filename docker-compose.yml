@@ -28,7 +28,7 @@ services:
 
   letsencrypt:
     image: quay.io/letsencrypt/letsencrypt:latest
-    command:  bash -c "if [ -d /etc/letsencrypt/live/opensmartcountry.com ]; then echo 'Letsencrypt certificates already generated'; else sleep 6 && certbot certonly --standalone -d opensmartcountry.com -d hipicasolera.com -d ilice.org -d cognitio.ilice.org -d kibana.opensmartcountry.com -d elastic.opensmartcountry.com -d jupyter.opensmartcountry.com -d api.opensmartcountry.com --text --agree-tos --email teanocrata@gmail.com --server https://acme-v01.api.letsencrypt.org/directory --rsa-key-size 4096 --verbose --renew-by-default --standalone-supported-challenges http-01; fi;"
+    command:  bash -c "if [ -d /etc/letsencrypt/live/opensmartcountry.com ]; then echo 'Letsencrypt certificates already generated, waiting 20 seconds' && sleep 20 && echo 'Done'; else sleep 6 && certbot certonly --standalone -d opensmartcountry.com -d hipicasolera.com -d ilice.org -d cognitio.ilice.org -d kibana.opensmartcountry.com -d elastic.opensmartcountry.com -d jupyter.opensmartcountry.com -d api.opensmartcountry.com --text --agree-tos --email teanocrata@gmail.com --server https://acme-v01.api.letsencrypt.org/directory --rsa-key-size 4096 --verbose --renew-by-default --standalone-supported-challenges http-01; fi;"
     entrypoint: ""
     volumes:
       - /etc/letsencrypt
