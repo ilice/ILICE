@@ -25,6 +25,12 @@ sed -i "s/__api.opensmartcountry.com__/$API_OPENSMARTCOUNTRY_DOMAIN/g" /etc/ngin
 echo replacing __www.hipicasolera.com__/$HIPICASOLERA_DOMAIN
 sed -i "s/__www.hipicasolera.com__/$HIPICASOLERA_DOMAIN/g" /etc/nginx/conf.d/ilice.conf
 
+echo replacing __www.ilice.org__/$ILICE_DOMAIN
+sed -i "s/__www.ilice.org__/$ILICE_DOMAIN/g" /etc/nginx/conf.d/ilice.conf
+
+echo replacing __cognitio.ilice.org__/$COGNITIO_ILICE_DOMAIN
+sed -i "s/__cognitio.ilice.org__/$COGNITIO_ILICE_DOMAIN/g" /etc/nginx/conf.d/ilice.conf
+
 cat /etc/nginx/conf.d/ilice.conf
 echo .
 echo Firing up nginx in the background.
@@ -68,6 +74,16 @@ else
 
   if [ -z "$HIPICASOLERA_DOMAIN" ]; then
       echo "Need to set HIPICASOLERA_DOMAIN (to a letsencrypt-registered name)."
+      exit 1
+  fi
+
+  if [ -z "$ILICE_DOMAIN" ]; then
+      echo "Need to set ILICE_DOMAIN (to a letsencrypt-registered name)."
+      exit 1
+  fi
+
+  if [ -z "$COGNITIO_ILICE_DOMAIN" ]; then
+      echo "Need to set COGNITIO_ILICE_DOMAIN (to a letsencrypt-registered name)."
       exit 1
   fi
 
@@ -115,6 +131,12 @@ else
 
   echo replacing __www.hipicasolera.com__/$HIPICASOLERA_DOMAIN
   sed -i "s/__www.hipicasolera.com__/$HIPICASOLERA_DOMAIN/g" /etc/nginx/ilice-secure.conf
+
+  echo replacing __www.ilice.org__/$ILICE_DOMAIN
+  sed -i "s/__www.ilice.org__/$ILICE_DOMAIN/g" /etc/nginx/ilice-secure.conf
+
+  echo replacing __cognitio.ilice.org__/$COGNITIO_ILICE_DOMAIN
+  sed -i "s/__cognitio.ilice.org__/$COGNITIO_ILICE_DOMAIN/g" /etc/nginx/ilice-secure.conf
 
   #go!
   kill $(ps aux | grep '[n]ginx' | awk '{print $2}')
